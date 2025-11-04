@@ -1,35 +1,53 @@
 ---
-import Hero from '../components/Hero.jsx';
-import Features from '../components/Features.jsx';
 import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation';
+import Hero from '../components/Hero';
+import Features from '../components/Features';
+import About from '../components/About';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+import content from '../data/content.json';
 ---
 
-<Layout title="Calafold - Software Development Company">
-	<header>
-		<nav>
-			<div class="nav-container">
-				<div class="logo">
-					<h2>Calafold</h2>
-				</div>
-				<ul class="nav-links">
-					<li><a href="#home">Home</a></li>
-					<li><a href="#services">Services</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
-				</ul>
-			</div>
-		</nav>
-	</header>
+<Layout title={content.site.title} description={content.site.description}>
+	<Navigation logo={content.navigation.logo} links={content.navigation.links} client:load />
 
-	<main>
-		<Hero client:load />
-		<Features client:load />
+	<main className="pt-16 sm:pt-20">
+		<Hero
+			title={content.hero.title}
+			tagline={content.hero.tagline}
+			description={content.hero.description}
+			cta={content.hero.cta}
+			client:load
+		/>
+
+		<Features
+			heading={content.features.heading}
+			items={content.features.items}
+			client:visible
+		/>
+
+		<About
+			heading={content.about.heading}
+			description={content.about.description}
+			stats={content.about.stats}
+			client:visible
+		/>
+
+		<Contact
+			heading={content.contact.heading}
+			description={content.contact.description}
+			email={content.contact.email}
+			phone={content.contact.phone}
+			social={content.contact.social}
+			client:visible
+		/>
 	</main>
 
-	<footer>
-		<div class="container">
-			<p>&copy; 2024 Calafold. All rights reserved.</p>
-			<p>Building the future, one line of code at a time.</p>
-			</div>
-	</footer>
+	<Footer
+		copyright={content.footer.copyright}
+		tagline={content.footer.tagline}
+		links={content.footer.links}
+		client:visible
+	/>
 </Layout>
